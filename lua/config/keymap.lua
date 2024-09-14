@@ -18,7 +18,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", opts)
 vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
 
-vim.keymap.set("n", "<leader>bq", "<cmd>BufferLinePickClose<CR>", opts)
+vim.keymap.set({ "n", "t" }, "<leader>bd", "<cmd>BufferLinePickClose<CR>", opts)
 
 vim.keymap.set("n", "<leader>|", "<C-w>v", opts)
 vim.keymap.set("n", "<leader>-", "<C-w>s", opts)
@@ -27,3 +27,9 @@ vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
