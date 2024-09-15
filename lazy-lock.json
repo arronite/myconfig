@@ -8,6 +8,7 @@
   "conform.nvim": { "branch": "master", "commit": "1a99fdc1d3aa9ccdf3021e67982a679a8c5c740c" },
   "dashboard-nvim": { "branch": "master", "commit": "fabf5feec96185817c732d47d363f34034212685" },
   "gitsigns.nvim": { "branch": "main", "commit": "1ef74b546732f185d0f806860fa5404df7614f28" },
+  "kulala.nvim": { "branch": "main", "commit": "a8696b23e80363ed52c4ffcca19228de5bebf0db" },
   "lazy.nvim": { "branch": "main", "commit": "48b52b5cfcf8f88ed0aff8fde573a5cc20b1306d" },
   "lsp-zero.nvim": { "branch": "v4.x", "commit": "9823b3e27deaf9f0152f3bc22f05b54f21e234e8" },
   "lualine.nvim": { "branch": "master", "commit": "b431d228b7bbcdaea818bdc3e25b8cdbe861f056" },

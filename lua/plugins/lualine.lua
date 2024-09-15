@@ -3,24 +3,31 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         require('lualine').setup {
-            sections = {
-                lualine_c = {
-                    {
-                        function()
-                            local filepath = vim.fn.expand('%:p')
-                            if filepath == '' then
-                                return 'No File'
-                            end
-                            return filepath
-                        end,
-                        cond = function()
-                            return vim.bo.filetype ~= 'NvimTree'
-                        end,
-                    },
-                },
-            },
             options = {
+                icons_enabled = true,
                 theme = 'auto',
+                component_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
+                disabled_filetypes = {
+                    statusline = {},
+                    winbar = {},
+                },
+                ignore_focus = {},
+                always_divide_middle = true,
+                globalstatus = false,
+                refresh = {
+                    statusline = 1000,
+                    tabline = 1000,
+                    winbar = 1000,
+                }
+            },
+            sections = {
+                lualine_a = { 'mode' },
+                lualine_b = { 'branch', 'diff', 'diagnostics' },
+                lualine_c = { 'filename' },
+                lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                lualine_y = { 'progress' },
+                lualine_z = { 'location' }
             },
             tabline = {},
             extensions = { 'nvim-tree' },
