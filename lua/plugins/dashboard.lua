@@ -8,9 +8,13 @@ return {
         require('dashboard').setup {
 
             theme = 'doom',
+
             config = {
                 week_header = {
                     enable = true,
+                },
+                header = {
+                    "gay"
                 },
                 center = {
 
