@@ -34,3 +34,7 @@ vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true })
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+vim.keymap.set('n', 'tt1', "<cmd>ToggleTerm 1<CR>", { noremap = true, silent = true })
+
+vim.keymap.set('n', 'tt2', "<cmd>ToggleTerm 2<CR>", { noremap = true, silent = true })

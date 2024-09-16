@@ -3,6 +3,8 @@ return {
         'VonHeikemen/lsp-zero.nvim',
         dependencies = {
             -- List dependencies as individual tables, providing options if necessary
+            --
+            { 'windwp/nvim-autopairs' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
             { 'neovim/nvim-lspconfig' },
@@ -84,6 +86,12 @@ return {
                 }),
                 matching = { disallow_symbol_nonprefix_matching = false }
             })
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
         end,
     }
 }

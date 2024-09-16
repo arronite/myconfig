@@ -6,18 +6,18 @@ return {
     event = 'VimEnter',
     config = function()
         require('dashboard').setup {
-
             theme = 'doom',
 
             config = {
-                week_header = {
-                    enable = true,
-                },
                 header = {
-                    "gay"
+                    "  ███╗   ██╗██╗   ██╗██╗███╗   ███╗",
+                    "  ████╗  ██║██║   ██║██║████╗ ████║",
+                    "  ██╔██╗ ██║██║   ██║██║██╔████╔██║",
+                    "  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+                    "  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║",
+                    "  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
                 },
                 center = {
-
                     { desc = 'New File', group = '@property', action = function()
                         local current_dir = vim.fn.expand('%:h')
                         local filename = 'filename' -- Replace with your desired filename
@@ -51,5 +51,4 @@ return {
             },
         }
     end,
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
 }
