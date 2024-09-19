@@ -8,11 +8,18 @@ return {
 		-- optionally enable 24-bit colour
 		vim.opt.termguicolors = true
 
-		-- empty setup using defaults
-		require("nvim-tree").setup()
 
 		-- OR setup with some options
-		require("nvim-tree").setup({
+		require("nvim-tree").setup({ diagnostics = {
+    enable = true,
+    show_on_dirs = true,  -- If you want to show diagnostics on folders
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
 			sort = {
 				sorter = "case_sensitive",
 			},
