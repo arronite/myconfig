@@ -10,12 +10,22 @@ return {
 			theme = "doom",
 			config = {
 				header = {
-					" ███╗   ██╗██╗   ██╗██╗███╗   ███╗",
-					" ████╗  ██║██║   ██║██║████╗ ████║",
-					" ██╔██╗ ██║██║   ██║██║██╔████╔██║",
-					" ██║╚██╗██║██║   ██║██║██║╚██╔╝██║",
-					" ██║ ╚████║╚██████╔╝██║██║ ╚═╝ ██║",
-					" ╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝     ╚═╝",
+					"                                  ",
+					"                                  ",
+					"                                  ",
+					"                                  ",
+					" _   _                            ",
+					"| | | |                           ",
+					"| |_| | _   _  _ __    ___  _ __  ",
+					"|  _  || | | || '_ \\  / _ \\| '__| ",
+					"| | | || |_| || |_) ||  __/| |    ",
+					"\\_| |_/ \\__, || .__/  \\___||_|    ",
+					"         __/ || |                 ",
+					"        |___/ |_|                 ",
+					"                                  ",
+					"                                  ",
+					"                                  ",
+					"                                  ",
 				},
 				center = {
 					{
@@ -30,9 +40,8 @@ return {
 					},
 					{ desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
 					{
-						icon = " ",
 						icon_hl = "@variable",
-						desc = "Files",
+						desc = " Files",
 						group = "Label",
 						action = "Telescope find_files",
 						key = "f",
@@ -56,9 +65,9 @@ return {
 			},
 		})
 		vim.cmd([[
-  highlight DashboardHeader guifg=#b31a00
-  highlight DashboardCenter guifg=#00ebeb
-  highlight DashboardFooter guifg=#cc1acc
+  highlight DashboardHeader guifg=#00ffff
+  highlight DashboardDesc guifg=#2dc00c
+  highlight DashboardFooter guifg=#c905ff
 ]])
 	end,
 }
