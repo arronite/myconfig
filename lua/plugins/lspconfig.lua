@@ -44,7 +44,9 @@ return {
 				severity_sort = true,
 				update_in_insert = false,
 			})
+			vim.opt.termguicolors = true
 
+			require("nvim-highlight-colors").setup({})
 			-- Mason setup
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
@@ -71,22 +73,33 @@ return {
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = cmp_action.luasnip_supertab(),
-					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+					["<S-Tab>"] = cmp.mapping.complete(),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
+
 				formatting = {
 					format = function(entry, item)
+						-- Apply lspkind first
+						local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
 						item = lspkind.cmp_format({
 							mode = "symbol",
 							maxwidth = 50,
 							ellipsis_char = "...",
 						})(entry, item)
+
+						-- Then apply nvim-highlight-colors to modify the kind or colors
+						if color_item.abbr_hl_group then
+							item.kind_hl_group = color_item.abbr_hl_group
+							item.kind = color_item.abbr -- Update kind with color formatting
+						end
+
 						return item
 					end,
 				},
+
 				sources = cmp.config.sources({
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
