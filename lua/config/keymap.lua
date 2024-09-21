@@ -29,6 +29,8 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+vim.api.nvim_set_keymap("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true })
@@ -42,8 +44,6 @@ vim.keymap.set("n", "<leader>ht", "<cmd>ToggleTerm 3 direction=horizontal<CR>", 
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
 vim.keymap.set("i", "<A-i>", "<cmd>CccPick<cr>", opts)
-
-vim.keymap.set({ "i", "v" }, "<C-space>", "<cmd>CccPick<cr>", opts)
 
 -- In terminal mode, use <Ctrl-w> for window navigation like in normal mode
 vim.api.nvim_set_keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
