@@ -57,7 +57,7 @@ return {
 						group = "Number",
 						action = function()
 							require("persistence").load()
-							vim.cmd("NvimTreeToggle")
+							vim.cmd("Neotree toggle")
 						end,
 						key = "r",
 					},

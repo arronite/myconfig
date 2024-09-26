@@ -1,5 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.o.textwidth = 80 -- Automatically break lines at 80 characters
 
 vim.g.mapleader = " "
 -- Tab settings
@@ -27,3 +28,6 @@ vim.opt.clipboard = "unnamed" -- Use system clipboard
 
 -- Mouse settings
 vim.opt.mouse = "a" -- Enable mouse support
+
+vim.opt.linebreak = true -- Break lines at word boundaries
+vim.opt.breakindent = true -- Indent wrapped lines for better readability

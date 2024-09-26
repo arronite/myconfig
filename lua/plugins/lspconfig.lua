@@ -16,11 +16,18 @@ return {
 		config = function()
 			local lsp_zero = require("lsp-zero")
 			local cmp_action = require("lsp-zero").cmp_action()
-
+			local lsp_attach = function(client, bufnr)
+				lsp_zero.default_keymaps({ buffer = bufnr })
+			end
 			-- Autopairs setup
 			require("nvim-autopairs").setup({})
 			lsp_zero.extend_lspconfig({
-				sign_text = true,
+				sign_text = {
+					error = "✘",
+					warn = "▲",
+					hint = "⚑",
+					info = "»",
+				},
 				lsp_attach = lsp_attach,
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			})
@@ -101,8 +108,8 @@ return {
 				},
 
 				sources = cmp.config.sources({
-					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
 				}, {
 					{ name = "buffer" },
 				}),

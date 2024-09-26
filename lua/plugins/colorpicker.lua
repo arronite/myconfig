@@ -6,11 +6,12 @@ return {
 
 		ccc.setup({
 			-- Your preferred settings
-			-- Example: enable highlighter
+			-- Example: enable highlighte
 			highlighter = {
 				auto_enable = true,
 				lsp = true,
 			},
+			alpha_show = "show",
 		})
 	end,
 }

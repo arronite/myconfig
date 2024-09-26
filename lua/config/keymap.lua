@@ -9,7 +9,7 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", opts)
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", opts)
 
 vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
@@ -43,7 +43,7 @@ vim.keymap.set("n", "<leader>ht", "<cmd>ToggleTerm 3 direction=horizontal<CR>", 
 
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
-vim.keymap.set("i", "<A-i>", "<cmd>CccPick<cr>", opts)
+vim.keymap.set("i", "<A-i>", "<cmd>CccPick<cr><esc>", opts)
 
 -- In terminal mode, use <Ctrl-w> for window navigation like in normal mode
 vim.api.nvim_set_keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
