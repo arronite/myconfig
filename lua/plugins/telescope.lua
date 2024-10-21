@@ -5,7 +5,5 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
 	config = function()
 		require("telescope").setup({})
-		require("telescope").load_extension("undo")
-		vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 	end,
 }

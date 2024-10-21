@@ -47,3 +47,10 @@ vim.keymap.set("i", "<A-i>", "<cmd>CccPick<cr><esc>", opts)
 
 -- In terminal mode, use <Ctrl-w> for window navigation like in normal mode
 vim.api.nvim_set_keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>cppb",
+	'<cmd>!cd build && cmake .. -G "MinGW Makefiles" && cmake --build .<CR>',
+	{ noremap = true, silent = true }
+)
