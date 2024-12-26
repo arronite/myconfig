@@ -3,7 +3,7 @@ return {
 	event = "VimEnter",
 	config = function()
 		require("notify").setup({
-			background_colour = "NotifyBackground",
+			background_colour = "#6dd7ff",
 			fps = 60,
 			icons = {
 				DEBUG = "",
@@ -13,6 +13,7 @@ return {
 				WARN = "",
 			},
 			level = 2,
+			max_width = 50,
 			minimum_width = 25,
 			render = "compact",
 			stages = "fade",
@@ -20,7 +21,7 @@ return {
 				notification = "%T",
 				notification_history = "%FT%T",
 			},
-			timeout = 5000,
+			timeout = 2000,
 			top_down = true,
 		})
 		vim.notify = require("notify")
