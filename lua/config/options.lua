@@ -1,6 +1,6 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.o.textwidth = 80 -- Automatically break lines at 80 characters
+vim.opt.textwidth = 80 -- Automatically break lines at 80 characters
 
 vim.g.mapleader = " "
 -- Tab settings
@@ -30,4 +30,13 @@ vim.opt.clipboard = "unnamed" -- Use system clipboard
 vim.opt.mouse = "a" -- Enable mouse support
 
 vim.opt.linebreak = true -- Break lines at word boundaries
-vim.opt.breakindent = true -- Indent wrapped lines for better readability
+vim.opt.breakindent = true -- Indent wrapped lines for better readability-- Soft wrap configuration
+vim.o.wrap = true -- Enable soft wrapping
+vim.o.linebreak = true -- Ensure wrapping happens at word boundaries
+
+-- Hard wrap configuration
+vim.o.textwidth = 80 -- Set the text width to 80 characters
+vim.o.formatoptions = vim.o.formatoptions .. "t" -- Enable auto wrapping for typed text
+
+-- Optional: Automatically reformat paragraphs
+vim.cmd("normal! gqap") -- Reformat the current paragraph when needed

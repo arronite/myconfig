@@ -2,6 +2,7 @@ local opts = { noremap = true }
 vim.api.nvim_set_keymap("i", "<C-s>", "<esc><cmd>w<cr>", opts)
 vim.api.nvim_set_keymap("n", "<C-s>", "<cmd>w<cr>", opts)
 
+vim.api.nvim_set_keymap("n", "<C-v>", "<cmd>visual block<cr>", opts)
 --vim.keymap.set({ "i", "n" }, "/", "<cmd>Neotree toggle current reveal_force_cwd<cr>", opts)
 
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
