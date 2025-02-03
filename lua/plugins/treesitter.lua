@@ -18,6 +18,7 @@ return {
 				"typescript",
 				"tsx",
 			},
+			incremental_selection = { enable = true },
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,

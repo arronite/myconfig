@@ -39,7 +39,7 @@ return {
 				green = "#00ffaa",
 				cyan = "#00b7ff",
 				blue = "#ff0099",
-				grey = "#478585",
+				grey = "#267373",
 			}, -- Override default colors
 			highlights = {}, -- Override highlight groups
 

@@ -1,6 +1,7 @@
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
+		event = "BufReadPre",
 		dependencies = {
 			{ "windwp/nvim-autopairs" },
 			{ "williamboman/mason.nvim" },
