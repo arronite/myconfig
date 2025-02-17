@@ -1,5 +1,6 @@
 return {
 	{
+
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup({})
@@ -47,24 +48,22 @@ return {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip", -- Snippet engine
-			"rafamadriz/friendly-snippets", -- Predefined snippets
-			"saadparwaiz1/cmp_luasnip", -- Completion source for LuaSnip
+			"L3MON4D3/LuaSnip",
+			"rafamadriz/friendly-snippets",
+			"saadparwaiz1/cmp_luasnip",
+			"brenoprata10/nvim-highlight-colors",
+			"onsails/lspkind.nvim", -- Add this
 		},
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind") -- Require lspkind
 
-			-- Load friendly-snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
-				preselect = "item",
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
 				sources = {
-					{ name = "luasnip" }, -- Add LuaSnip as a source
+					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 				},
@@ -74,9 +73,7 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
-					-- Simple tab complete
 					["<Tab>"] = cmp.mapping(function(fallback)
 						local col = vim.fn.col(".") - 1
 
@@ -88,10 +85,15 @@ return {
 							cmp.complete()
 						end
 					end, { "i", "s" }),
-
-					-- Go to previous item
 					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol", -- Use icons
+						maxwidth = 50,
+						ellipsis_char = "...",
+					}),
+				},
 			})
 		end,
 	},
