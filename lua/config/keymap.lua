@@ -5,10 +5,10 @@ vim.api.nvim_set_keymap("n", "<C-s>", "<cmd>w<cr>", opts)
 vim.api.nvim_set_keymap("n", "<C-v>", "<cmd>visual block<cr>", opts)
 --vim.keymap.set({ "i", "n" }, "/", "<cmd>Neotree toggle current reveal_force_cwd<cr>", opts)
 
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
+-- vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
+-- vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", opts)
 

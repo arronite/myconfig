@@ -33,10 +33,16 @@ vim.opt.linebreak = true -- Break lines at word boundaries
 vim.opt.breakindent = true -- Indent wrapped lines for better readability-- Soft wrap configuration
 vim.o.wrap = true -- Enable soft wrapping
 vim.o.linebreak = true -- Ensure wrapping happens at word boundaries
-
 -- Hard wrap configuration
-vim.o.textwidth = 80 -- Set the text width to 80 characters
-vim.o.formatoptions = vim.o.formatoptions .. "t" -- Enable auto wrapping for typed text
+vim.fn.sign_define("DiagnosticSignError", { text = "✘", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "ℹ", texthl = "DiagnosticSignInfo" })
 
--- Optional: Automatically reformat paragraphs
-vim.cmd("normal! gqap") -- Reformat the current paragraph when needed
+vim.diagnostic.config({
+	virtual_text = true, -- Disable inline virtual text
+	signs = true, -- Enable signs in the gutter
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+})

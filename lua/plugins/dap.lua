@@ -36,7 +36,10 @@ return {
 				end,
 			},
 		}
-
-		-- Debugger event listeners for feedback
+		dap.adapters.delve = {
+			type = "server",
+			host = "127.0.0.1",
+			port = 38697,
+		}
 	end,
 }

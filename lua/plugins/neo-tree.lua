@@ -25,6 +25,14 @@ return {
 			--       end
 			--   end , -- this sorts files and directories descendantly
 			default_component_configs = {
+				diagnostics = {
+					symbols = {
+						hint = "", -- Hint icon
+						info = "ℹ", -- Info icon
+						warn = "", -- Warning icon
+						error = "✘", -- Error icon
+					},
+				},
 				container = {
 					enable_character_fade = true,
 				},

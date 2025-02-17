@@ -11,10 +11,9 @@ return {
 				javascriptreact = { "prettierd" },
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
+				go = { "gofumpt" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-			},
+			format_on_save = {},
 		})
 	end,
 }

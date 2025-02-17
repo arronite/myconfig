@@ -1,149 +1,98 @@
 return {
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		event = "BufReadPre",
-		dependencies = {
-			{ "windwp/nvim-autopairs" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "neovim/nvim-lspconfig" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/nvim-cmp" },
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
-			{ "onsails/lspkind.nvim" },
-			{ "brenoprata10/nvim-highlight-colors" },
-		},
+		"williamboman/mason.nvim",
 		config = function()
-			local lsp_zero = require("lsp-zero")
-			local cmp_action = require("lsp-zero").cmp_action()
-			local lsp_attach = function(client, bufnr)
-				lsp_zero.default_keymaps({ buffer = bufnr })
-			end
-			-- Autopairs setup
-			require("nvim-autopairs").setup({})
-			lsp_zero.extend_lspconfig({
-				sign_text = {
-					error = "✘",
-					warn = "▲",
-					hint = "⚑",
-					info = "»",
-				},
-				lsp_attach = lsp_attach,
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			})
-
-			-- Diagnostics config
-			vim.diagnostic.config({
-				virtual_text = {
-					prefix = "●",
-					spacing = 2,
-					format = function(diagnostic)
-						if #diagnostic.message > 80 then
-							return string.sub(diagnostic.message, 1, 77) .. "..."
-						end
-						return diagnostic.message
-					end,
-				},
-				float = {
-					source = "always",
-					border = "rounded",
-				},
-				severity_sort = true,
-				update_in_insert = false,
-			})
-			vim.opt.termguicolors = true
-
-			require("nvim-highlight-colors").setup({})
-			-- Mason setup
 			require("mason").setup({})
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+		config = function()
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
 						require("lspconfig")[server_name].setup({
-							--	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+							capabilities = require("cmp_nvim_lsp").default_capabilities(),
 						})
 					end,
 				},
 			})
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(event)
+					local opts = { buffer = event.buf }
 
-			-- CMP setup for autocompletion
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
+					vim.keymap.set({ "n", "x" }, "<F3>", function()
+						vim.lsp.buf.format({ async = true })
+					end, opts)
+					vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+				end,
+			})
+		end,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"L3MON4D3/LuaSnip", -- Snippet engine
+			"rafamadriz/friendly-snippets", -- Predefined snippets
+			"saadparwaiz1/cmp_luasnip", -- Completion source for LuaSnip
+		},
+		config = function()
 			local cmp = require("cmp")
-			local lspkind = require("lspkind")
+			local luasnip = require("luasnip")
+
+			-- Load friendly-snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
-				experimental = { ghost_text = true },
+				preselect = "item",
+				completion = {
+					completeopt = "menu,menuone,noinsert",
+				},
+				sources = {
+					{ name = "luasnip" }, -- Add LuaSnip as a source
+					{ name = "nvim_lsp" },
+					{ name = "buffer" },
+				},
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						luasnip.lsp_expand(args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp_action.luasnip_supertab(),
-					["<S-Tab>"] = cmp.mapping.complete(),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-				}),
 
-				formatting = {
-					format = function(entry, item)
-						-- Apply lspkind first
-						local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
-						item = lspkind.cmp_format({
-							mode = "symbol",
-							maxwidth = 50,
-							ellipsis_char = "...",
-						})(entry, item)
+					["<CR>"] = cmp.mapping.confirm({ select = false }),
+					-- Simple tab complete
+					["<Tab>"] = cmp.mapping(function(fallback)
+						local col = vim.fn.col(".") - 1
 
-						-- Then apply nvim-highlight-colors to modify the kind or colors
-						if color_item.abbr_hl_group then
-							item.kind_hl_group = color_item.abbr_hl_group
-							item.kind = color_item.abbr -- Update kind with color formatting
+						if cmp.visible() then
+							cmp.select_next_item({ behavior = "select" })
+						elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+							fallback()
+						else
+							cmp.complete()
 						end
+					end, { "i", "s" }),
 
-						return item
-					end,
-				},
-
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
+					-- Go to previous item
+					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 				}),
 			})
-
-			-- Additional filetype configurations
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources({
-					{ name = "git" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
-
-			-- Autopairs integration
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 }
