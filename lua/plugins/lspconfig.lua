@@ -47,10 +47,12 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer", -- Completion from buffer words
+			"hrsh7th/cmp-path", -- Completion for file paths
+			"hrsh7th/cmp-nvim-lsp", -- LSP completions
+			"hrsh7th/cmp-cmdline", -- Command-line completions
+			"saadparwaiz1/cmp_luasnip", -- Snippet completions
 			"L3MON4D3/LuaSnip",
-			"rafamadriz/friendly-snippets",
-			"saadparwaiz1/cmp_luasnip",
 			"brenoprata10/nvim-highlight-colors",
 			"onsails/lspkind.nvim", -- Add this
 		},
@@ -63,9 +65,10 @@ return {
 
 			cmp.setup({
 				sources = {
-					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "luasnip" },
 				},
 				snippet = {
 					expand = function(args)
@@ -85,7 +88,7 @@ return {
 							cmp.complete()
 						end
 					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+					["<S-Tab>"] = cmp.mapping.complete(),
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
